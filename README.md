@@ -42,4 +42,4 @@ Feel free to contribute by submitting bug reports, feature requests, or pull req
 
 ## License
 
-This project is licensed under the AGPL License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the AGPLv3 License - see the [LICENSE](LICENSE) file for details.
