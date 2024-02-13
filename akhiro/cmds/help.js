@@ -10,21 +10,44 @@ module.exports = {
     const commands = Object.values(global.AkhiroBot.commands);
 
     if (args.length === 0) {
-      let helpMessage = "Available Commands:\n\n";
+      let helpMessage = "╭─• [ Help ]\n│\n";
       for (const command of commands) {
         const { name, description } = command.config;
-        helpMessage += `${name} - ${description}\n`;
+        helpMessage += `│ ➤ **${name}**\n`;
+        helpMessage += `│    ${description}\n`;
+        helpMessage += `│\n`;
       }
+      helpMessage += "╰──•";
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else {
       const commandName = args[0].toLowerCase();
-      const targetCommand = commands.find(command => command.config.name.toLowerCase() === commandName || (command.config.aliases && command.config.aliases.includes(commandName)));
+      const targetCommand = commands.find(
+        (command) =>
+          command.config.name.toLowerCase() === commandName ||
+          (command.config.aliases && command.config.aliases.includes(commandName))
+      );
 
       if (targetCommand) {
-        const { name, description, usage } = targetCommand.config;
-        api.sendMessage(`${name} - ${description}\nUsage: \`${global.AkhiroBot.botPrefix}${usage}\``, event.threadID, event.messageID);
+        const { name, description, usage, author, aliases } = targetCommand.config;
+        let helpMessage = `╭─• [ ${name} ]\n`;
+        helpMessage += `│ ➤ **description**\n`;
+        helpMessage += `│    ${description}\n`;
+        helpMessage += `│ ➤ **usage**\n`;
+        helpMessage += `│    Usage: \`${global.AkhiroBot.botPrefix}${usage}\`\n`;
+        helpMessage += `│ ➤ **author**\n`;
+        helpMessage += `│    ${author}\n`;
+        if (aliases) {
+          helpMessage += `│ ➤ **aliases**\n`;
+          helpMessage += `│    ${aliases.join(", ")}\n`;
+        }
+        helpMessage += `╰──•`;
+        api.sendMessage(helpMessage, event.threadID, event.messageID);
       } else {
-        api.sendMessage("❌ | Command not found. Use `help` to see available commands.", event.threadID, event.messageID);
+        api.sendMessage(
+          "❌ | Command not found. Use `help` to see available commands.",
+          event.threadID,
+          event.messageID
+        );
       }
     }
   },
