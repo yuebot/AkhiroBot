@@ -51,12 +51,13 @@ function initializeBot() {
           "logLevel": "silent"
         });
 
-        api.listen(async (err, message) => {
+        api.listen(async (err, message, event) => {
           try {
             if (err) {
               throw new Error(`Error while listening: ${err}`);
             }
 
+            /*
             const userExists = await utils.getUserById(event.senderID);
 
             if (!userExists) {
@@ -68,6 +69,7 @@ function initializeBot() {
             if (!threadExists) {
               await utils.addThreadById(event.threadID);
             }
+            */
 
             if (message.body && message.body.toLowerCase() === 'prefix') {
               api.sendMessage(
