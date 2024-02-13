@@ -13,7 +13,7 @@ module.exports = {
       let helpMessage = "╭─• [ Help ]\n│\n";
       for (const command of commands) {
         const { name, description } = command.config;
-        helpMessage += `│ ➤ **${name}**\n`;
+        helpMessage += `│ ➤ ${name}\n`;
         helpMessage += `│    ${description}\n`;
         helpMessage += `│\n`;
       }
@@ -30,14 +30,14 @@ module.exports = {
       if (targetCommand) {
         const { name, description, usage, author, aliases } = targetCommand.config;
         let helpMessage = `╭─• [ ${name} ]\n`;
-        helpMessage += `│ ➤ **description**\n`;
+        helpMessage += `│ ➤ description\n`;
         helpMessage += `│    ${description}\n`;
-        helpMessage += `│ ➤ **usage**\n`;
+        helpMessage += `│ ➤ usage\n`;
         helpMessage += `│    Usage: \`${global.AkhiroBot.botPrefix}${usage}\`\n`;
-        helpMessage += `│ ➤ **author**\n`;
+        helpMessage += `│ ➤ author\n`;
         helpMessage += `│    ${author}\n`;
         if (aliases) {
-          helpMessage += `│ ➤ **aliases**\n`;
+          helpMessage += `│ ➤ aliases\n`;
           helpMessage += `│    ${aliases.join(", ")}\n`;
         }
         helpMessage += `╰──•`;
