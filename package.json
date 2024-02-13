@@ -17,6 +17,7 @@
     "fb-mica-api": "github:ruingl/fb-mica-api",
     "fs-extra": "^11.2.0",
     "gradient-string": "^2.0.2",
+    "hercai": "^12.1.1",
     "node-fetch": "^3.2.6",
     "sequelize": "^6.37.0",
     "sqlite3": "^5.1.7"

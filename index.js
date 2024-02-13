@@ -11,7 +11,7 @@ const app = express();
 
 fs.ensureFileSync(configPath);
 const config = fs.readJsonSync(configPath, { throws: false }) || {
-  botPrefix: "#",
+  botPrefix: "/",
 };
 
 global.AkhiroBot = {

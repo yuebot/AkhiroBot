@@ -7,7 +7,7 @@ module.exports = {
     aliases: ["commands", "cmd"],
   },
   onRun: async ({ api, event, args }) => {
-    const commands = global.AkhiroBot.commands.values();
+    const commands = Object.values(global.AkhiroBot.commands);
 
     if (args.length === 0) {
       let helpMessage = "Available Commands:\n\n";
@@ -18,7 +18,7 @@ module.exports = {
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else {
       const commandName = args[0].toLowerCase();
-      const targetCommand = Array.from(commands).find(command => command.config.name.toLowerCase() === commandName || (command.config.aliases && command.config.aliases.includes(commandName)));
+      const targetCommand = commands.find(command => command.config.name.toLowerCase() === commandName || (command.config.aliases && command.config.aliases.includes(commandName)));
 
       if (targetCommand) {
         const { name, description, usage } = targetCommand.config;
