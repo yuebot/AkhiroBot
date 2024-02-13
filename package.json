@@ -1,18 +1,18 @@
 {
-  "name": "nodejs",
+  "name": "AkhiroBot",
   "version": "1.0.0",
-  "description": "",
+  "description": "AkhiroBot by Rui, Francis",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Rui, Francis",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^18.0.6",
-    "chalk": "^4.1.2",
+    "chalk": "4.1.2",
     "express": "^4.18.2",
     "fb-mica-api": "github:ruingl/fb-mica-api",
     "fs-extra": "^11.2.0",
