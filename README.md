@@ -1,6 +1,7 @@
 # AkhiroBot
 
 [![fb-mica-api](https://img.shields.io/badge/uses-fb--mica--api-blue)](https://github.com/ruingl/fb-mica-api)
+<img alt="version" src="https://img.shields.io/github/package-json/v/ruingl/AkhiroBot?label=github">
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 AkhiroBot is a versatile Facebook Messenger bot powered by Node.js.
