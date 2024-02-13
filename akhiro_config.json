@@ -1,0 +1,20 @@
+{
+  "language": "en",
+  "DeveloperMode": true,
+  "autoCreateDB": true,
+  "allowInbox": true,
+  "autoClean": true,
+  "adminOnly": false,
+  "encryptSt": true,
+  "removeSt": false,
+  "commandDisabled": [],
+  "eventDisabled": 
+
+  "botName": "bot",
+  "botPrefix": "#",
+  "botDev": "Francis Loyd Raval",
+  "devLink": "https://www.facebook.com/certainly.francis",
+  "devUID": "",
+  "botADMIN": "Francis Loyd Raval",
+  "ADMIN_UID": "",
+}
