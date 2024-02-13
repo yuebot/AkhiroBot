@@ -3,6 +3,7 @@ const fs = require("fs-extra");
 const express = require("express");
 const chalk = require("chalk");
 const gradient = require("gradient-string");
+const utils = require("./database/utils");
 
 const PORT = 3000;
 const configPath = "akhiro_config.json";
@@ -44,6 +45,11 @@ function initializeBot() {
         if (err) {
           throw new Error(`Error while logging in: ${err}`);
         }
+
+        api.setOptions({
+          "listenEvents": true,
+          "logLevel": "silent"
+        });
 
         api.listen((err, message) => {
           try {
