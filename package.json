@@ -14,7 +14,7 @@
     "@types/node": "^20.11.17",
     "chalk": "4.1.2",
     "express": "^4.18.2",
-    "fb-mica-api": "github:ruingl/fb-mica-api",
+    "fb-chat-api-temp": "github:ntkhang03/fb-chat-api-temp",
     "fs-extra": "^11.2.0",
     "gradient-string": "^2.0.2",
     "hercai": "^12.1.1",

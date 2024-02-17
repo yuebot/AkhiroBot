@@ -1,24 +1,9 @@
 {
-  "language": "en",
-  "DeveloperMode": true,
-  "autoCreateDB": true,
-  "allowInbox": true,
-  "autoClean": true,
-  "adminOnly": false,
-  "encryptSt": true,
-  "removeSt": false,
-  "commandDisabled": [],
-  "eventDisabled": [],
-  
-  "credits": "Rui (coder), Francis",
-  "botName": "bot",
   "botPrefix": "/",
-  "botOwner": "Francis Loyd Raval ",
-  "OwnerLink": "",
-  "OwnerUID": "",
-  "botDev": "Francis Loyd Raval",
-  "devLink": "https://www.facebook.com/certainly.francis",
-  "devUID": "",
-  "botADMIN": "Francis Loyd Raval",
-  "ADMIN_UID": "",
+  "botAdmins": [
+    "100054298824923",
+    "100034065047763",
+    "100075058221244",
+    "61554222594723"
+  ]
 }

@@ -8,6 +8,10 @@ module.exports = {
   },
   onRun: ({ api, event }) => {
     const result = Math.floor(Math.random() * 6) + 1;
-    api.sendMessage(`🎲 You rolled a ${result}!`, event.threadID, event.messageID);
+    api.sendMessage(
+      `🎲 You rolled a ${result}!`,
+      event.threadID,
+      event.messageID,
+    );
   },
 };
