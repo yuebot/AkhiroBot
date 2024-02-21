@@ -1,4 +1,4 @@
-<h1>🤖 | AKHIROBOT<sub><sub><sub><sub><h6>- By Francis Raval & Rui Reogo & LiANE</h6></sub></sub></sub>
+<h1>🤖 | YSD: AkhiroBot<sub><sub><sub><sub><h6>- By Francis Raval & Rui Reogo & LiANE</h6></sub></sub></sub>
 Introduction</h1>
 
 <img align="center" src="https://i.postimg.cc/J4StDcpg/lv-0-20240217160135-ezgif-com-video-to-gif-converter.gif"/>
