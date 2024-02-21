@@ -17,6 +17,8 @@ module.exports = {
       const postData = {
         apikey: apiKey,
       };
+
+      api.setMessageReaction("⌛", event.messageID, (err) => console.log(err), true);
       
       const response = await axios.post('https://shoti-srv1.onrender.com/api/v1/get', postData);
 
@@ -30,7 +32,8 @@ module.exports = {
         fs.writeFileSync(videoPath, Buffer.from(videoBuffer.data, 'utf-8'));
 
         const fileStream = fs.createReadStream(videoPath);
-        await api.sendMessage({ attachment: fileStream, body: `@${videoData.user.nickname}` }, event.threadID);
+        api.setMessageReaction("✅", event.messageID, (err) => console.log(err), true);
+        await api.sendMessage({ attachment: fileStream, body: `@${videoData.user.username}`, }, event.threadID, event.messageID);
 
         setTimeout(() => {
           fs.unlinkSync(videoPath);
