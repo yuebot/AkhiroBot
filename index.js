@@ -10,15 +10,13 @@ const app = express();
 
 const configPath = path.join(process.cwd(), "akhiro_config.json");
 
-const config = fs.readJsonSync(configPath, { throws: true });
+const config = JSON.parse(fs.readFileSync("akhiro_config.json", "utf8"));
 
 global.AkhiroBot = {
   botPrefix: config.botPrefix,
   botAdmins: config.botAdmins,
   commands: {},
 };
-
-console.log(global.AkhiroBot.botAdmins);
 
 app.use(express.static("public"));
 
@@ -239,22 +237,24 @@ function initializeBot() {
                     const requiredRole = command.config.role;
 
                     if (requiredRole === 1) {
-                      function isAdmin(userId) {
-                        return global.AkhiroBot.botAdmins.includes(userId);
-                      }
+                        function isAdmin(userId) {
+                            return global.AkhiroBot.botAdmins.includes(userId);
+                        }
 
-                      if (!isAdmin) {
-                        api.sendMessage(
-                          "❌ | You don't have the required role to execute this command.",
-                          event.threadID,
-                          event.messageID,
-                        );
-                        return;
-                      }
+                        if (!isAdmin(event.senderID)) {
+                            api.sendMessage(
+                                "❌ | You don't have the required role to execute this command.",
+                                event.threadID,
+                                event.messageID,
+                            );
+                            return;
+                        } else {
+                            await command.onRun({ api, event, args, fonts });
+                        }
+                    } else {
+                        await command.onRun({ api, event, args, fonts });
                     }
                   }
-
-                  await command.onRun({ api, event, args, fonts });
                 } else {
                   api.sendMessage(
                     `❌ | Invalid command, use \`${global.AkhiroBot.botPrefix}help\` to show available commands.`,
