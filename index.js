@@ -156,7 +156,19 @@ function initializeBot() {
 
               if (event.body && event.body.toLowerCase() === "prefix") {
                 api.sendMessage(
-                  `My prefix is: \`${global.AkhiroBot.botPrefix}\``,
+                  fonts.applyFonts(`▄▀█ █▄▀ █░█ █ █▀█ █▀█
+█▀█ █░█ █▀█ █ █▀▄ █▄█
+━━━━━━━━━━━━━━━━━━━
+Hello there User, Im AkhiroBot. My Prefix Is This [ ${global.AkhiroBot.botPrefix} ]. I Hope You Will Enjoy Using Me, Have Fun. Thanks!
+
+AkhiroBot Is A Collab Bot File Project Made By AkhiroDev, LiANE And Yu3Bot, So Please If You Managed To Find This File, Please Don't Abuse This Bot File Project Of Our's.
+
+DEVELOPERS OF AKHIROBOT:
+- YueBot ( Rui Reogo )
+- AkhiroDev ( Francis Loyd Raval )
+- LiANE ( Liane Cagara )
+
+YSD: AkhiroBot`, "sans"),
                   event.threadID,
                   event.messageID,
                 );
