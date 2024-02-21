@@ -10,7 +10,7 @@ const app = express();
 
 const configPath = path.join(process.cwd(), "akhiro_config.json");
 
-const config = JSON.parse(fs.readFileSync("akhiro_config.json", "utf8"));
+const config = fs.readJsonSync(configPath, { throws: true });
 
 global.AkhiroBot = {
   botPrefix: config.botPrefix,
@@ -22,6 +22,10 @@ app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get("/README.md", (req, res) => {
+  res.sendFile(__dirname + "/README.md");
 });
 
 function loadCommands() {
@@ -58,202 +62,88 @@ function initializeBot() {
           logLevel: "silent",
         });
 
-        api.listen(async (err, event, message) => {
-          try {
-            if (err) {
-              throw new Error(`❌ | Error while listening: ${err}`);
-            }
+          api.listen(async (err, event, message) => {
+            try {
+              if (err) {
+                throw new Error(`❌ | Error while listening: ${err}`);
+              }
 
-            const applyFonts = (text, fontType) => {
-              const selectedFont = fonts[fontType.toLowerCase()];
-              if (!selectedFont) return text;
+              const applyFonts = (text, fontType) => {
+  const selectedFont = fonts[fontType.toLowerCase()];
+  if (!selectedFont) return text;
 
-              const result = text
-                .split("")
-                .map((char) => selectedFont[char] || char)
-                .join("");
+  const result = text
+    .split('')
+    .map(char => selectedFont[char] || char)
+    .join('');
 
-              return result;
-            };
+  return result;
+};
 
-            const fonts = {
-              sans: {
-                a: "𝖺",
-                b: "𝖻",
-                c: "𝖼",
-                d: "𝖽",
-                e: "𝖾",
-                f: "𝖿",
-                g: "𝗀",
-                h: "𝗁",
-                i: "𝗂",
-                j: "𝗃",
-                k: "𝗄",
-                l: "𝗅",
-                m: "𝗆",
-                n: "𝗇",
-                o: "𝗈",
-                p: "𝗉",
-                q: "𝗊",
-                r: "𝗋",
-                s: "𝗌",
-                t: "𝗍",
-                u: "𝗎",
-                v: "𝗏",
-                w: "𝗐",
-                x: "𝗑",
-                y: "𝗒",
-                z: "𝗓",
-                A: "𝖠",
-                B: "𝖡",
-                C: "𝖢",
-                D: "𝖣",
-                E: "𝖤",
-                F: "𝖥",
-                G: "𝖦",
-                H: "𝖧",
-                I: "𝖨",
-                J: "𝖩",
-                K: "𝖪",
-                L: "𝖫",
-                M: "𝖬",
-                N: "𝖭",
-                O: "𝖮",
-                P: "𝖯",
-                Q: "𝖰",
-                R: "𝖱",
-                S: "𝖲",
-                T: "𝖳",
-                U: "𝖴",
-                V: "𝖵",
-                W: "𝖶",
-                X: "𝖷",
-                Y: "𝖸",
-                Z: "𝖹",
-                0: "𝟢",
-                1: "𝟣",
-                2: "𝟤",
-                3: "𝟥",
-                4: "𝟦",
-                5: "𝟧",
-                6: "𝟨",
-                7: "𝟩",
-                8: "𝟪",
-                9: "𝟫",
-              },
-              bold: {
-                a: "𝗮",
-                b: "𝗯",
-                c: "𝗰",
-                d: "𝗱",
-                e: "𝗲",
-                f: "𝗳",
-                g: "𝗴",
-                h: "𝗵",
-                i: "𝗶",
-                j: "𝗷",
-                k: "𝗸",
-                l: "𝗹",
-                m: "𝗺",
-                n: "𝗻",
-                o: "𝗼",
-                p: "𝗽",
-                q: "𝗾",
-                r: "𝗿",
-                s: "𝘀",
-                t: "𝘁",
-                u: "𝘂",
-                v: "𝘃",
-                w: "𝘄",
-                x: "𝘅",
-                y: "𝘆",
-                z: "𝘇",
-                A: "𝗔",
-                B: "𝗕",
-                C: "𝗖",
-                D: "𝗗",
-                E: "𝗘",
-                F: "𝗙",
-                G: "𝗚",
-                H: "𝗛",
-                I: "𝗜",
-                J: "𝗝",
-                K: "𝗞",
-                L: "𝗟",
-                M: "𝗠",
-                N: "𝗡",
-                O: "𝗢",
-                P: "𝗣",
-                Q: "𝗤",
-                R: "𝗥",
-                S: "𝗦",
-                T: "𝗧",
-                U: "𝗨",
-                V: "𝗩",
-                W: "𝗪",
-                X: "𝗫",
-                Y: "𝗬",
-                Z: "𝗭",
-                0: "𝟢",
-                1: "𝟣",
-                2: "𝟤",
-                3: "𝟥",
-                4: "𝟦",
-                5: "𝟧",
-                6: "𝟨",
-                7: "𝟩",
-                8: "𝟪",
-                9: "𝟫",
-              },
-              applyFonts: applyFonts,
-            };
+          const fonts = {
+            sans: {
+              a: "𝖺", b: "𝖻", c: "𝖼", d: "𝖽", e: "𝖾", f: "𝖿", g: "𝗀", h: "𝗁", i: "𝗂", j: "𝗃",
+              k: "𝗄", l: "𝗅", m: "𝗆", n: "𝗇", o: "𝗈", p: "𝗉", q: "𝗊", r: "𝗋", s: "𝗌", t: "𝗍",
+              u: "𝗎", v: "𝗏", w: "𝗐", x: "𝗑", y: "𝗒", z: "𝗓",
+              A: "𝖠", B: "𝖡", C: "𝖢", D: "𝖣", E: "𝖤", F: "𝖥", G: "𝖦", H: "𝖧", I: "𝖨", J: "𝖩",
+              K: "𝖪", L: "𝖫", M: "𝖬", N: "𝖭", O: "𝖮", P: "𝖯", Q: "𝖰", R: "𝖱", S: "𝖲", T: "𝖳",
+              U: "𝖴", V: "𝖵", W: "𝖶", X: "𝖷", Y: "𝖸", Z: "𝖹",
+              0: "𝟢", 1: "𝟣", 2: "𝟤", 3: "𝟥", 4: "𝟦", 5: "𝟧", 6: "𝟨", 7: "𝟩", 8: "𝟪", 9: "𝟫",
+            },
+            bold: {
+              a: "𝗮", b: "𝗯", c: "𝗰", d: "𝗱", e: "𝗲", f: "𝗳", g: "𝗴", h: "𝗵", i: "𝗶", j: "𝗷",
+              k: "𝗸", l: "𝗹", m: "𝗺", n: "𝗻", o: "𝗼", p: "𝗽", q: "𝗾", r: "𝗿", s: "𝘀", t: "𝘁",
+              u: "𝘂", v: "𝘃", w: "𝘄", x: "𝘅", y: "𝘆", z: "𝘇",
+              A: "𝗔", B: "𝗕", C: "𝗖", D: "𝗗", E: "𝗘", F: "𝗙", G: "𝗚", H: "𝗛", I: "𝗜", J: "𝗝",
+              K: "𝗞", L: "𝗟", M: "𝗠", N: "𝗡", O: "𝗢", P: "𝗣", Q: "𝗤", R: "𝗥", S: "𝗦", T: "𝗧",
+              U: "𝗨", V: "𝗩", W: "𝗪", X: "𝗫", Y: "𝗬", Z: "𝗭",
+              0: "𝟢", 1: "𝟣", 2: "𝟤", 3: "𝟥", 4: "𝟦", 5: "𝟧", 6: "𝟨", 7: "𝟩", 8: "𝟪", 9: "𝟫",
+            },
+            applyFonts: applyFonts,
+          };
 
-            if (event.body && event.body.toLowerCase() === "prefix") {
-              api.sendMessage(
-                `My prefix is: \`${global.AkhiroBot.botPrefix}\``,
-                event.threadID,
-                event.messageID,
-              );
-            } else if (
-              event.body &&
-              event.body.toLowerCase().startsWith(global.AkhiroBot.botPrefix)
-            ) {
-              const [inputCommand, ...args] = event.body
-                .slice(global.AkhiroBot.botPrefix.length)
-                .trim()
-                .split(" ");
-              const commandName = Object.keys(global.AkhiroBot.commands).find(
-                (key) =>
-                  global.AkhiroBot.commands[key].config.aliases?.includes(
-                    inputCommand,
-                  ) || key === inputCommand,
-              );
+              const processCommand = async () => {
+                const [inputCommand, ...args] = event.body
+                  .slice(global.AkhiroBot.botPrefix.length)
+                  .trim()
+                  .split(" ");
 
-              if (commandName) {
-                const command = global.AkhiroBot.commands[commandName];
+                const commandName = Object.keys(global.AkhiroBot.commands).find(
+                  (key) =>
+                    global.AkhiroBot.commands[key].config.aliases?.includes(inputCommand) ||
+                    key === inputCommand,
+                );
 
-                if (command && command.onRun) {
-                  if (command.config && command.config.role) {
-                    const requiredRole = command.config.role;
+                if (commandName) {
+                  const command = global.AkhiroBot.commands[commandName];
 
-                    if (requiredRole === 1) {
+                  if (command && command.onRun) {
+                    if (command.config && command.config.role) {
+                      const requiredRole = command.config.role;
+
+                      if (requiredRole === 1) {
                         function isAdmin(userId) {
-                            return global.AkhiroBot.botAdmins.includes(userId);
+                          return global.AkhiroBot.botAdmins.includes(userId);
                         }
 
                         if (!isAdmin(event.senderID)) {
-                            api.sendMessage(
-                                "❌ | You don't have the required role to execute this command.",
-                                event.threadID,
-                                event.messageID,
-                            );
-                            return;
-                        } else {
-                            await command.onRun({ api, event, args, fonts });
+                          api.sendMessage(
+                            "❌ | You don't have the required role to execute this command.",
+                            event.threadID,
+                            event.messageID,
+                          );
+                          return;
                         }
-                    } else {
-                        await command.onRun({ api, event, args, fonts });
+                      }
                     }
+
+                    await command.onRun({ api, event, args, fonts });
+                  } else {
+                    api.sendMessage(
+                      `❌ | Invalid command, use \`${global.AkhiroBot.botPrefix}help\` to show available commands.`,
+                      event.threadID,
+                      event.messageID,
+                    );
                   }
                 } else {
                   api.sendMessage(
@@ -262,17 +152,20 @@ function initializeBot() {
                     event.messageID,
                   );
                 }
-              } else {
+              };
+
+              if (event.body && event.body.toLowerCase() === "prefix") {
                 api.sendMessage(
-                  `❌ | Invalid command, use \`${global.AkhiroBot.botPrefix}help\` to show available commands.`,
+                  `My prefix is: \`${global.AkhiroBot.botPrefix}\``,
                   event.threadID,
                   event.messageID,
                 );
+              } else if (event.body && event.body.toLowerCase().startsWith(global.AkhiroBot.botPrefix)) {
+                await processCommand();
               }
+            } catch (error) {
+              console.error(chalk.red(`${error}`));
             }
-          } catch (error) {
-            console.error(chalk.red(`${error}`));
-          }
         });
       } catch (error) {
         console.error(chalk.red(`${error}`));
