@@ -35,15 +35,25 @@ function loadCommands() {
     .filter((file) => file.endsWith(".js"));
 
   commandFiles.forEach((file) => {
+    const startTime = new Date();
     const commandName = file.replace(".js", "");
     const command = require(path.join(commandsPath, file));
+    const endTime = new Date();
 
     if (command.config && command.onRun) {
       global.AkhiroBot.commands[commandName] = command;
+
+      const duration = endTime - startTime;
+    const loadingLog = gradient.rainbow(
+      `Loaded ${commandName}.js (${duration}ms)`,
+    );
+    console.log(loadingLog);
+      
     } else {
       console.error(`❌ | Invalid command structure for ${commandName}.`);
     }
   });
+  console.log("");
 }
 
 function initializeBot() {
@@ -189,11 +199,11 @@ YSD: AkhiroBot`, "sans"),
 }
 
 app.listen(PORT, () => {
-  loadCommands();
   initializeBot();
-
-  console.log(gradient.retro("AkhiroBot v1"));
-  console.log(gradient.retro("━━━━━━━━━━━━━━━"));
+  console.log(gradient.retro(`▄▀█ █▄▀ █░█ █ █▀█ █▀█
+█▀█ █░█ █▀█ █ █▀▄ █▄█`));
+  console.log(gradient.retro("━━━━━━━━━━━━━━━━━━━"));
+  loadCommands();
   console.log(gradient.retro("[ SYSTEM ] Getting started..."));
   console.log(gradient.retro(`[ SYSTEM ] Website running on port ${PORT}`));
   console.log(gradient.retro("[ SYSTEM ] Successfully connected to Database"));

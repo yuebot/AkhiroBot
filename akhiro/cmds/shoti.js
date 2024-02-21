@@ -1,40 +1,46 @@
-const axios = require("axios");
-const fs = require("fs");
-const path = require("path");
+const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
   config: {
     name: "shoti",
-    description: "Get a random Shoti video.",
+    role: 1,
+    description: "Get video from Shoti API",
     usage: "shoti",
-    author: "Rui | Liby",
-    aliases: ["shoti"],
-    role: 1, // Only for admins
+    author: "Rui",
   },
-  onRun: async ({ api, event }) => {
-    api.setMessageReaction("🕐", event.messageID, (err) => {}, true);
-
+  onRun: async ({ api, event, args }) => {
     try {
-      const response = await axios.get(`https://wifey-shoti.onrender.com/kshitiz`, { responseType: "stream" });
+      const apiKey = "$shoti-1hn634vu67edaqv02qo";
 
-      const tempVideoPath = path.join(__dirname, "cache", `${Date.now()}.mp4`);
+      const postData = {
+        apikey: apiKey,
+      };
+      
+      const response = await axios.post('https://shoti-srv1.onrender.com/api/v1/get', postData);
 
-      const writer = fs.createWriteStream(tempVideoPath);
-      response.data.pipe(writer);
+      if (response.data.code === 200) {
+        const videoData = response.data.data;
+        const videoURL = videoData.url;
+        const videoFilename = `${Date.now()}_shoti.mp4`;
 
-      writer.on("finish", async () => {
-        const stream = fs.createReadStream(tempVideoPath);
+        const videoBuffer = await axios.get(videoURL, { responseType: 'arraybuffer' });
+        const videoPath = path.join(__dirname, 'videos', videoFilename);
+        fs.writeFileSync(videoPath, Buffer.from(videoBuffer.data, 'utf-8'));
 
-        api.sendMessage({
-          body: `Random Wifey Vidoes.`,
-          attachment: stream,
-        }, event.threadID, event.messageID);
+        const fileStream = fs.createReadStream(videoPath);
+        await api.sendMessage({ attachment: fileStream, body: `@${videoData.user.nickname}` }, event.threadID);
 
-        api.setMessageReaction("✅", event.messageID, (err) => {}, true);
-      });
+        setTimeout(() => {
+          fs.unlinkSync(videoPath);
+        }, 5500);
+      } else {
+        api.sendMessage(`❌ | API Error: ${response.data.message}`, event.threadID);
+      }
     } catch (error) {
       console.error(error);
-      api.sendMessage("Sorry, an error occurred while processing your request.", event.threadID, event.messageID);
+      api.sendMessage(`❌ | An error occurred: ${error.message}`, event.threadID);
     }
   },
 };
