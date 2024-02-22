@@ -8,7 +8,7 @@ module.exports = {
     role: 1,
     description: "Get video from Shoti API",
     usage: "shoti",
-    author: "Rui",
+    author: "Rui | Liby",
   },
   onRun: async ({ api, event, args }) => {
     try {
