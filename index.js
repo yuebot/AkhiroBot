@@ -1,4 +1,4 @@
-const login = require("fb-chat-api-temp");
+const login = require("./fb-chat-api/index");
 const fs = require("fs-extra");
 const express = require("express");
 const chalk = require("chalk");
