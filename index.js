@@ -16,6 +16,9 @@ global.AkhiroBot = {
   botPrefix: config.botPrefix,
   botAdmins: config.botAdmins,
   commands: {},
+  loadCmd: loadCmd,
+  unloadCmd: unloadCmd,
+  loadAll: loadAll,
 };
 
 app.use(express.static("public"));
@@ -54,6 +57,46 @@ function loadCommands() {
     }
   });
   console.log("");
+}
+
+function loadCmd(file) {
+  const filePath = path.join(__dirname, 'akhiro', 'cmds', `${file}.js`);
+
+  try {
+    const command = require(filePath);
+    const { name } = command.config;
+    global.AkhiroBot.commands[name] = command;
+    return { success: true, message: `Command "${name}" loaded successfully.` };
+  } catch (error) {
+    return { success: false, message: `Error loading command from file "${file}.js": ${error.message}` };
+  }
+}
+
+function unloadCmd(name) {
+  const command = global.AkhiroBot.commands[name];
+
+  if (command) {
+    delete global.AkhiroBot.commands[name];
+    return { success: true, message: `Command "${name}" unloaded successfully.` };
+  } else {
+    return { success: false, message: `Command "${name}" not found.` };
+  }
+}
+
+function loadAll() {
+  const commandsDir = path.join(__dirname, 'akhiro', 'cmds');
+  const files = fs.readdirSync(commandsDir);
+
+  const results = [];
+
+  for (const file of files) {
+    if (file.endsWith('.js')) {
+      const result = loadCmd(file.replace('.js', ''));
+      results.push(result);
+    }
+  }
+
+  return results;
 }
 
 function initializeBot() {

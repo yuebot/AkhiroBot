@@ -4,7 +4,7 @@ module.exports = {
     description: "Show available commands and their descriptions",
     usage: "help [command]",
     author: "Rui",
-    aliases: ["commands", "cmd"],
+    aliases: ["commands", "h"],
     role: 0, // Set role to 0 for non-admin command (help)
   },
   onRun: async ({ api, event, args, fonts }) => {
