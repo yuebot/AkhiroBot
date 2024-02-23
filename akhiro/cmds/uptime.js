@@ -10,7 +10,7 @@ module.exports = {
     usage: "uptime",
     author: "Rui",
   },
-  onRun: async ({ api, event }) => {
+  onRun: async ({ api, event, fonts }) => {
     try {
       const uptimeInSeconds = (new Date() - startTime) / 1000;
       const uptimeFormatted = new Date(uptimeInSeconds * 1000)
@@ -29,28 +29,30 @@ module.exports = {
       const usedMemoryGB = totalMemoryGB - freeMemoryGB;
 
       const systemInfo = `
-━━━━[ 𝗨𝗣𝗧𝗜𝗠𝗘 ]━━━━
+❍━━━━[ 𝗨𝗣𝗧𝗜𝗠𝗘 ]━━━━❍
 
- ${uptimeFormatted}
-
- Language: Node.js
- OS: ${os.type()} ${os.arch()}
- Node.js Version: ${process.version}
- CPU Model: ${os.cpus()[0].model}
- Memory: ${usedMemoryGB.toFixed(2)} GB / ${totalMemoryGB.toFixed(2)} GB
- CPU Usage: ${cpuUsage.toFixed(1)}%
- RAM Usage: ${((usedMemoryGB / totalMemoryGB) * 100).toFixed(1)}%
- Uptime: ${uptimeInSeconds.toFixed(2)} seconds
+©️ | 𝗦𝗢𝗨𝗥𝗖𝗘: 𝖠𝗄𝗁𝗂𝗋𝗈𝖡𝗈𝗍
+™️ | 𝗟𝗔𝗡𝗚𝗨𝗔𝗚𝗘: 𝖭𝗈𝖽𝖾.𝗃𝗌
+❍━━━━━━━━━━━━━━━❍
+🆙 | 𝗨𝗣𝗧𝗜𝗠𝗘𝗗: ${uptimeFormatted} 𝗌𝖾𝖼𝗈𝗇𝖽𝗌
+❍━━━━━━━━━━━━━━━❍
+𝗢𝗦: ${os.type()} ${os.arch()}
+𝗡𝗢𝗗𝗘.𝗝𝗦 𝗩𝗘𝗥𝗦𝗜𝗢𝗡: ${process.version}
+𝗖𝗣𝗨 𝗠𝗢𝗗𝗘𝗟: ${os.cpus()[0].model}
+𝗠𝗘𝗠𝗢𝗥𝗬: ${usedMemoryGB.toFixed(2)} GB / ${totalMemoryGB.toFixed(2)} GB
+𝗖𝗣𝗨 𝗨𝗦𝗔𝗚𝗘: ${cpuUsage.toFixed(1)}%
+𝗥𝗔𝗠 𝗨𝗦𝗔𝗚𝗘: ${process.memoryUsage().heapUsed / 1024 / 1024} MB;
+❍━━━━━━━━━━━━━━━❍
 `;
 
-      api.sendMessage(systemInfo, event.threadID, event.messageID);
-    } catch (error) {
-      console.error("Error retrieving system information:", error);
-      api.sendMessage(
-        "Unable to retrieve system information.",
-        event.threadID,
-        event.messageID,
-      );
-    }
-  },
+api.sendMessage(systemInfo, event.threadID, event.messageID);
+} catch (error) {
+console.error("Error retrieving system information:", error);
+api.sendMessage(
+"Unable to retrieve system information.",
+event.threadID,
+event.messageID,
+);
+}
+},
 };
