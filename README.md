@@ -47,7 +47,7 @@ Introduction</h1>
 5. Create new repl and use Blank Repl Template
 6. Run this script to install AkhiroBot
    ```bash
-     git clone https://github.com/yuebot/AkhiroBot; cp -r AkhiroBot/. .; rm -r AkhiroBot
+   git clone https://github.com/yuebot/AkhiroBot; cp -r AkhiroBot/. .; rm -r AkhiroBot
    ```
 7. Run and you're done :)
 
