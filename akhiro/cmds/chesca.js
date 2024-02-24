@@ -2,7 +2,7 @@ const axios = require('axios');
 
 module.exports["config"] = {
   name: "chesca",
-  credits: "Rui | LiANE @nealianacagara",
+  author: "Rui | LiANE @nealianacagara",
   role: 0,
   usage: "chesca [prompt]",
 };

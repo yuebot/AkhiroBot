@@ -11,7 +11,7 @@ module.exports = {
     const commands = Object.values(global.AkhiroBot.commands);
 
     if (args.length === 0) {
-      let helpMessage = `${fonts.applyFonts("╭────────⭓ [ Available Commands ]", "bold")}\n│\n`;
+      let helpMessage = `${fonts.applyFonts("╭─❍「 AKHIRO COMMMANDS 」", "bold")}\n│\n`;
       for (const command of commands) {
         const { name, description, role } = command.config;
         helpMessage += `${fonts.applyFonts(

@@ -1,5 +1,9 @@
 {
+  "botName": "AkhiroBot",
   "botPrefix": "/",
+  "botOwner": "AkhiroDev",
+  "contact": "https://facebook.com/certainly.francis",
+  "botDev": "AkhiroDev & Yu3Bot & LiANE",
   "botAdmins": [
     "100034065047763",
     "100075058221244",

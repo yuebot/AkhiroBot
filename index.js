@@ -13,7 +13,12 @@ const configPath = path.join(process.cwd(), "akhiro_config.json");
 const config = fs.readJsonSync(configPath, { throws: true });
 
 global.AkhiroBot = {
+  botName: config.botName,
   botPrefix: config.botPrefix,
+  botDev: config.botDev,
+  contact: config.contact,
+  botOwner: config.botOwner,
+  ownerUID: config.ownerUID,
   botAdmins: config.botAdmins,
   commands: {},
   loadCmd: loadCmd,
@@ -48,13 +53,11 @@ function loadCommands() {
 
       const duration = endTime - startTime;
     const loadingLog = gradient.rainbow(
-      `Loaded ${commandName}.js (${duration}ms)`,
+      `[ COMMAND ] Loaded ${commandName}.js (${duration}ms)`,
     );
     console.log(loadingLog);
-      
-    } else {
-      console.error(`❌ | Invalid command structure for ${commandName}.`);
-    }
+
+    } 
   });
   console.log("");
 }
@@ -243,11 +246,27 @@ YSD: AkhiroBot`, "sans"),
 
 app.listen(PORT, () => {
   initializeBot();
-  console.log(gradient.retro(`▄▀█ █▄▀ █░█ █ █▀█ █▀█
-█▀█ █░█ █▀█ █ █▀▄ █▄█`));
-  console.log(gradient.retro("━━━━━━━━━━━━━━━━━━━"));
-  loadCommands();
+  console.log(gradient.retro(`    ▄▀█ █▄▀ █░█ █ █▀█ █▀█ █▄▄ █▀█ ▀█▀
+    █▀█ █░█ █▀█ █ █▀▄ █▄█ █▄█ █▄█ ░█░
+              Version 1.0.0`));
+  console.log(gradient.retro("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"));
   console.log(gradient.retro("[ SYSTEM ] Getting started..."));
   console.log(gradient.retro(`[ SYSTEM ] Website running on port ${PORT}`));
   console.log(gradient.retro("[ SYSTEM ] Successfully connected to Database"));
-});
+  console.log(gradient.retro(`[ SYSTEM ] Starting AkhiroBot`));
+  console.log(gradient.retro(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`))
+  console.log(gradient.rainbow(`
+   █▀ █▀█ █▀▄▀█ █▀▄▀█ ▄▀█ █▄░█ █▀▄ █▀
+   █▄ █▄█ █░▀░█ █░▀░█ █▀█ █░▀█ █▄▀ ▄█`));
+  console.log();
+  loadCommands();
+  console.log(gradient.retro(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`));
+  console.log(gradient.retro(`    ▄▀█ █▄▀ █░█ █ █▀█ █▀█ █▄▄ █▀█ ▀█▀
+    █▀█ █░█ █▀█ █ █▀▄ █▄█ █▄█ █▄█ ░█░
+            BOT INFORMATION`));
+  console.log();
+  console.log(gradient.retro(`[ BOT NAME ] AKHIROBOT`));
+  console.log(gradient.retro(`[ BOT PRFX ] ${global.AkhiroBot.botPrefix} `));
+  console.log(gradient.retro(`[ BOT OWNER ] ${global.AkhiroBot.botOwner}`));
+  console.log(gradient.retro(`[ BOT DEVS ] ${global.AkhiroBot.botDev}`))
+}); 
