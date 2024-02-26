@@ -21,7 +21,7 @@
     "node-fetch": "^3.2.6",
     "sequelize": "^6.37.1",
     "sqlite3": "^5.1.7",
-    "https-proxy-agent": "^4.0.0",
+    "https-proxy-agent": "^7.0.4",
     "mqtt": "^3.0.0",
     "npmlog": "^1.2.0",
     "request": "^2.53.0",
