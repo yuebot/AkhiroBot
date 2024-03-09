@@ -5,23 +5,33 @@ module.exports = {
     usage: "help [command]",
     author: "Rui",
     aliases: ["commands", "h"],
-    role: 0, // Set role to 0 for non-admin command (help)
+    role: 0,
   },
   onRun: async ({ api, event, args, fonts }) => {
     const commands = Object.values(global.AkhiroBot.commands);
 
     if (args.length === 0) {
-      let helpMessage = `${fonts.applyFonts("╭─❍「 AKHIRO COMMMANDS 」", "bold")}\n│\n`;
+      let helpMessage = `
+♡   ∩_∩
+ （„• ֊ •„)♡
+╭─∪∪───────────⟡
+│ 𝙲𝙾𝙼𝙼𝙰𝙽𝙳𝚂 𝙻𝙸𝚂𝚃𝚂
+├──────────────⟡`;
       for (const command of commands) {
         const { name, description, role } = command.config;
         helpMessage += `${fonts.applyFonts(
-          `│ ➤ ${role === 1 ? "👑 | " : ""}${name}`,
+          `\n├ ✧ ${role === 1 ? "👑 | " : ""}${name}`,
           "bold",
-        )}\n`;
+        )} \n`;
         helpMessage += `${fonts.applyFonts(`│    ${description}`, "sans")}\n`;
-        helpMessage += `│\n`;
+        helpMessage += `├─────────────⟡`;
       }
-      helpMessage += `${fonts.applyFonts("╰──•", "bold")}`;
+      helpMessage += `
+│ 𝙲𝚛𝚎𝚊𝚝𝚎𝚍 𝙱𝚢: 𝙰𝚔𝚑𝚒𝚛𝚘𝙳𝚎𝚟
+│ 𝙿𝚛𝚘𝚐𝚛𝚊𝚖𝚖𝚎𝚍 𝙱𝚢: 𝚁𝚞𝚒𝙳𝚎𝚟
+│ 𝙵𝚒𝚡𝚎𝚍 𝙱𝚢: 𝙻𝚒𝙰𝙽𝙴
+╰──────────────⟡
+`;
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else {
       const commandName = args[0].toLowerCase();
@@ -36,27 +46,27 @@ module.exports = {
         const { name, description, usage, author, aliases, role } =
           targetCommand.config;
         let helpMessage = `${fonts.applyFonts(
-          `╭─• [ ${role === 1 ? "👑 | " : ""}${name} ]`,
+          `╭─❍ 「 ${role === 1 ? "👑 " : ""}${name}} 」`,
           "bold",
         )}\n`;
-        helpMessage += `${fonts.applyFonts(`│ ➤ description`, "bold")}\n`;
+        helpMessage += `${fonts.applyFonts(`│ ✧ DESCRIPTION`, "bold")}\n`;
         helpMessage += `${fonts.applyFonts(`│    ${description}`, "sans")}\n`;
-        helpMessage += `${fonts.applyFonts(`│ ➤ usage`, "bold")}\n`;
+        helpMessage += `${fonts.applyFonts(`│ ✧ USAGE`, "bold")}\n`;
         helpMessage += `${fonts.applyFonts(
-          `│    Usage: \`${global.AkhiroBot.botPrefix}${usage}\``,
+          `│ Usage: \`${global.AkhiroBot.botPrefix}${usage}\``,
           "sans",
         )}\n`;
-        helpMessage += `${fonts.applyFonts(`│ ➤ author`, "bold")}\n`;
+        helpMessage += `${fonts.applyFonts(`│ ✧ AUTHOR`, "bold")}\n`;
         helpMessage += `${fonts.applyFonts(`│    ${author}`, "sans")}\n`;
         if (aliases) {
-          helpMessage += `${fonts.applyFonts(`│ ➤ aliases`, "bold")}\n`;
+          helpMessage += `${fonts.applyFonts(`│ ✧ ALIASES`, "bold")}\n`;
           helpMessage += `${fonts.applyFonts(
             `│    ${aliases.join(", ")}\n`,
             "sans",
           )}`;
         }
         if (role === 1) {
-          helpMessage += `${fonts.applyFonts(`│ ➤ role`, "bold")}\n`;
+          helpMessage += `${fonts.applyFonts(`│ ✧ ROLE`, "bold")}\n`;
           helpMessage += `${fonts.applyFonts(
             `│    👑 | Command for admins only\n`,
             "sans",
