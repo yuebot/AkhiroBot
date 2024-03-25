@@ -6,7 +6,6 @@ module.exports = {
     role: 0,
     aliases: ["chatgpt"],
     author: "AkhiroDEV",
-    description: "𝗚𝗣𝗧 𝗂𝗌 𝖺 𝖠𝖨 𝖼𝗁𝖺𝗍𝖻𝗈𝗍 𝗍𝗁𝖺𝗍 𝗁𝖾𝗅𝗉𝗌 𝗒𝗈𝗎 𝗂𝗇 𝗒𝗈𝗎𝗋 𝖺𝗌𝗌𝗂𝗀𝗇𝗆𝖾𝗇𝗍.",
     usage: "gpt [ query ]"
   },
   onRun: async ({ args, api, fonts, event }) => {
