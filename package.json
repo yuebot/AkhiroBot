@@ -19,7 +19,7 @@
     "gradient-string": "^2.0.2",
     "hercai": "^12.2.0",
     "node-fetch": "^3.2.6",
-    "sequelize": "^6.37.1",
+    "sequelize": "^6.37.2",
     "sqlite3": "^5.1.7",
     "https-proxy-agent": "^4.0.0",
     "mqtt": "^3.0.0",
