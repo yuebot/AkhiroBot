@@ -1,6 +1,6 @@
-const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
+const axios = require("axios");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = {
   config: {
@@ -17,7 +17,7 @@ module.exports = {
     if (args.length === 0) {
       const helpMessage = `${fonts.applyFonts("Specify a subcommand:", "bold")}\n${fonts.applyFonts(
         "- help: Display help for commands\n- load: Load a specific command\n- loadAll: Load all commands\n- unload: Unload a specific command\n- install: Install a new command from code/pastebin link",
-        "sans"
+        "sans",
       )}`;
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else {
@@ -27,7 +27,7 @@ module.exports = {
         case "help":
           const helpMessage = `${fonts.applyFonts("Commands Module Help:", "bold")}\n${fonts.applyFonts(
             "- help: Display help for commands\n- load: Load a specific command\n- loadAll: Load all commands\n- unload: Unload a specific command\n- install: Install a new command from code/pastebin link",
-            "sans"
+            "sans",
           )}`;
           api.sendMessage(helpMessage, event.threadID, event.messageID);
           break;
@@ -36,7 +36,10 @@ module.exports = {
           if (args.length >= 2) {
             const commandName = args[1];
             loadCmd(commandName);
-            api.sendMessage(`✅ | Command '${commandName}' loaded successfully!`, event.threadID);
+            api.sendMessage(
+              `✅ | Command '${commandName}' loaded successfully!`,
+              event.threadID,
+            );
           } else {
             api.sendMessage(`❌ | Specify a command to load.`, event.threadID);
           }
@@ -44,16 +47,25 @@ module.exports = {
 
         case "loadall":
           loadAll();
-          api.sendMessage(`✅ | All commands loaded successfully!`, event.threadID);
+          api.sendMessage(
+            `✅ | All commands loaded successfully!`,
+            event.threadID,
+          );
           break;
 
         case "unload":
           if (args.length >= 2) {
             const commandName = args[1];
             unloadCmd(commandName);
-            api.sendMessage(`✅ | Command '${commandName}' unloaded successfully!`, event.threadID);
+            api.sendMessage(
+              `✅ | Command '${commandName}' unloaded successfully!`,
+              event.threadID,
+            );
           } else {
-            api.sendMessage(`❌ | Specify a command to unload.`, event.threadID);
+            api.sendMessage(
+              `❌ | Specify a command to unload.`,
+              event.threadID,
+            );
           }
           break;
 
@@ -66,22 +78,34 @@ module.exports = {
               const response = await axios.get(codeLink);
               const code = response.data;
 
-              const tempFilePath = path.join(process.cwd(), 'temp', filename);
+              const tempFilePath = path.join(process.cwd(), "temp", filename);
               fs.writeFileSync(tempFilePath, code);
 
               loadCmd(tempFilePath);
 
-              api.sendMessage(`✅ | Command '${filename}' installed successfully!`, event.threadID);
+              api.sendMessage(
+                `✅ | Command '${filename}' installed successfully!`,
+                event.threadID,
+              );
             } catch (error) {
-              api.sendMessage(`❌ | Error installing command: ${error.message}`, event.threadID);
+              api.sendMessage(
+                `❌ | Error installing command: ${error.message}`,
+                event.threadID,
+              );
             }
           } else {
-            api.sendMessage(`❌ | Specify a code link and filename to install a command.`, event.threadID);
+            api.sendMessage(
+              `❌ | Specify a code link and filename to install a command.`,
+              event.threadID,
+            );
           }
           break;
 
         default:
-          api.sendMessage(`❌ | Unknown subcommand. Use 'help' for assistance.`, event.threadID);
+          api.sendMessage(
+            `❌ | Unknown subcommand. Use 'help' for assistance.`,
+            event.threadID,
+          );
       }
     }
   },

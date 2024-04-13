@@ -1,4 +1,4 @@
-const { exec } = require('child_process');
+const { exec } = require("child_process");
 
 module.exports = {
   config: {
@@ -13,13 +13,21 @@ module.exports = {
     const cmd = args.join(" ");
 
     if (!cmd) {
-      api.sendMessage(`Please provide a command to run.`, event.threadID, event.messageID);
+      api.sendMessage(
+        `Please provide a command to run.`,
+        event.threadID,
+        event.messageID,
+      );
       return;
     }
 
     exec(cmd, (error, stdout, stderr) => {
       if (error) {
-        api.sendMessage(`❌ Error: ${error.message}`, event.threadID, event.messageID);
+        api.sendMessage(
+          `❌ Error: ${error.message}`,
+          event.threadID,
+          event.messageID,
+        );
         return;
       }
 

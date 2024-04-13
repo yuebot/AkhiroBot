@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require("axios");
 
 module.exports.config = {
   name: "nica",
@@ -14,10 +14,15 @@ module.exports.onRun = async ({ api, event, args }) => {
     const { name } = data[event.senderID];
 
     if (query) {
-      api.setMessageReaction("⏳", event.messageID, (err) => console.log(err), true);
+      api.setMessageReaction(
+        "⏳",
+        event.messageID,
+        (err) => console.log(err),
+        true,
+      );
       const processingMessage = await api.sendMessage(
         `Asking 🔎 Nica. Please wait a moment...`,
-        event.threadID
+        event.threadID,
       );
 
       const apiUrl = `https://lianeapi.onrender.com/@LianeAPI_Reworks/api/nica?userName=${encodeURIComponent(name)}&key=j86bwkwo-8hako-12C&query=${encodeURIComponent(query)}`;
@@ -25,8 +30,17 @@ module.exports.onRun = async ({ api, event, args }) => {
 
       if (response.data && response.data.message) {
         const trimmedMessage = response.data.message.trim();
-        api.setMessageReaction("✅", event.messageID, (err) => console.log(err), true);
-        await api.sendMessage({ body: trimmedMessage }, event.threadID, event.messageID);
+        api.setMessageReaction(
+          "✅",
+          event.messageID,
+          (err) => console.log(err),
+          true,
+        );
+        await api.sendMessage(
+          { body: trimmedMessage },
+          event.threadID,
+          event.messageID,
+        );
 
         console.log(`Sent 🔎 Nica's response to the user`);
       } else {

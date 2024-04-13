@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 module.exports = {
   config: {
@@ -11,13 +11,13 @@ module.exports = {
   },
   onRun: async ({ api, event, args }) => {
     try {
-      const videosDirectory = path.join(__dirname, 'videos');
+      const videosDirectory = path.join(__dirname, "videos");
 
       if (fs.existsSync(videosDirectory)) {
         const initialSize = getDirectorySize(videosDirectory);
 
         const files = fs.readdirSync(videosDirectory);
-        const shotiVideos = files.filter((file) => file.includes('_shoti.mp4'));
+        const shotiVideos = files.filter((file) => file.includes("_shoti.mp4"));
 
         shotiVideos.forEach((video) => {
           const videoPath = path.join(videosDirectory, video);
@@ -27,9 +27,17 @@ module.exports = {
         const finalSize = getDirectorySize(videosDirectory);
         const freedUpSpace = initialSize - finalSize;
 
-        api.sendMessage(`✅ Deleted Shoti videos and freed up ${formatBytes(freedUpSpace)}.`, event.threadID, event.messageID);
+        api.sendMessage(
+          `✅ Deleted Shoti videos and freed up ${formatBytes(freedUpSpace)}.`,
+          event.threadID,
+          event.messageID,
+        );
       } else {
-        api.sendMessage("❌ 'videos/' directory not found.", event.threadID, event.messageID);
+        api.sendMessage(
+          "❌ 'videos/' directory not found.",
+          event.threadID,
+          event.messageID,
+        );
       }
     } catch (error) {
       console.error(error);
@@ -52,12 +60,14 @@ function getDirectorySize(directory) {
 }
 
 function formatBytes(bytes, decimals = 2) {
-  if (bytes === 0) return '0 Bytes';
+  if (bytes === 0) return "0 Bytes";
 
   const k = 1024;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
 
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(decimals)) + ' ' + sizes[i];
+  return (
+    parseFloat((bytes / Math.pow(k, i)).toFixed(decimals)) + " " + sizes[i]
+  );
 }

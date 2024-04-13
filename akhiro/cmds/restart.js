@@ -9,6 +9,6 @@ module.exports = {
   onRun: async ({ api, event, args }) => {
     await api.sendMessage("Restarted :)", event.threadID, event.messageID);
 
-		process.exit(2);
+    process.exit(2);
   },
 };

@@ -45,14 +45,14 @@ module.exports = {
 ❍━━━━━━━━━━━━━━━❍
 `;
 
-api.sendMessage(systemInfo, event.threadID, event.messageID);
-} catch (error) {
-console.error("Error retrieving system information:", error);
-api.sendMessage(
-"Unable to retrieve system information.",
-event.threadID,
-event.messageID,
-);
-}
-},
+      api.sendMessage(systemInfo, event.threadID, event.messageID);
+    } catch (error) {
+      console.error("Error retrieving system information:", error);
+      api.sendMessage(
+        "Unable to retrieve system information.",
+        event.threadID,
+        event.messageID,
+      );
+    }
+  },
 };

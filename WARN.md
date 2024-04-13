@@ -1,4 +1,5 @@
 # ⚠️ AkhiroBot - Edit Restriction Notice
+
 <sub><h6>- Rui Reogo</h6></sub>
 
 ## License Information

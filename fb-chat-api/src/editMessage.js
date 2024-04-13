@@ -3,7 +3,7 @@
  * @author RFS-ADRENO
  * @rewrittenBy Isai Ivanov
  */
-const generateOfflineThreadingId = require('../utils');
+const generateOfflineThreadingId = require("../utils");
 
 function canBeCalled(func) {
   try {
@@ -21,10 +21,10 @@ function canBeCalled(func) {
  * @param {Object} callback - Callback for the function.
  */
 
-module.exports = function(defaultFuncs, api, ctx) {
+module.exports = function (defaultFuncs, api, ctx) {
   return function editMessage(text, messageID, callback) {
     if (!ctx.mqttClient) {
-      throw new Error('Not connected to MQTT');
+      throw new Error("Not connected to MQTT");
     }
 
     ctx.wsReqNumber += 1;
@@ -37,19 +37,19 @@ module.exports = function(defaultFuncs, api, ctx) {
 
     const query = {
       failure_count: null,
-      label: '742',
+      label: "742",
       payload: JSON.stringify(queryPayload),
-      queue_name: 'edit_message',
+      queue_name: "edit_message",
       task_id: ctx.wsTaskNumber,
     };
 
     const context = {
-      app_id: '2220391788200892',
+      app_id: "2220391788200892",
       payload: {
         data_trace_id: null,
         epoch_id: parseInt(generateOfflineThreadingId),
         tasks: [query],
-        version_id: '6903494529735864',
+        version_id: "6903494529735864",
       },
       request_id: ctx.wsReqNumber,
       type: 3,
@@ -61,6 +61,9 @@ module.exports = function(defaultFuncs, api, ctx) {
       ctx.reqCallbacks[ctx.wsReqNumber] = callback;
     }
 
-    ctx.mqttClient.publish('/ls_req', JSON.stringify(context), { qos: 1, retain: false });
-  }
-}
+    ctx.mqttClient.publish("/ls_req", JSON.stringify(context), {
+      qos: 1,
+      retain: false,
+    });
+  };
+};

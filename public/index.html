@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -58,13 +58,13 @@
     <script src="https://cdn.jsdelivr.net/npm/commonmark@0.29.2/dist/commonmark.min.js"></script>
     <script>
       // Fetch and render the README.md content using CommonMark.js
-      fetch('../README.md')
-        .then(response => response.text())
-        .then(text => {
+      fetch("../README.md")
+        .then((response) => response.text())
+        .then((text) => {
           const reader = new commonmark.Parser();
           const writer = new commonmark.HtmlRenderer();
           const parsed = reader.parse(text);
-          document.getElementById('readme').innerHTML = writer.render(parsed);
+          document.getElementById("readme").innerHTML = writer.render(parsed);
         });
     </script>
   </body>
